@@ -1,0 +1,14 @@
+<h1>Welcome to Zallet</h1>
+
+{{#if loggedIn}}
+    <form method="POST" action="/user/logout">
+        <button class="homeButton" type="submit">Logout</button>
+    </form>
+    {{else}}
+        <form method="GET" action="/user/register">
+            <button class="homeButton" type="submit">Register</button>
+        </form>
+        <form method="GET" action="/user/login">
+            <button class="homeButton" type="submit">Login</button>
+        </form>
+{{/if}}

@@ -1,0 +1,19 @@
+<h1>Registration</h1>
+<form class="userRegistrationForm" method="POST" action="/user">
+    <div class="userAttribute">
+        Name:
+        <input name="name" type="name" />
+    </div>
+    <div class="userAttribute">
+        Email:
+        <input name="email" type="email" />
+    </div>
+    {{#if duplicateEmail}}
+    <p class="errorMessage">This email is already taken.</p>
+    {{/if}}
+    <div class="userAttribute">
+        Password:
+        <input name="password" type="password" />
+    </div>
+    <input name="submit" type="submit" />
+</form>

@@ -1,0 +1,39 @@
+<h1>Update Personal Information</h1>
+<form class="userUpdateForm" method="POST" action="/user/{{user.id}}?_method=PUT">
+    <div class="userAttribute">
+        Account Number:
+        <input name="accountNumber" type="type" value="{{user.id}}" readonly />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Name:
+        <input name="name" type="type" value="{{user.name}}" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Email:
+        <input name="email" type="type" value="{{user.email}}" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Gender:
+        <input name="gender" type="type" value="{{user.gender}}" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Age:
+        <input name="age" type="type" value="{{user.age}}" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Occupation:
+        <input name="occupation" type="type" value="{{user.occupation}}" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Salary:
+        <input name="salary" type="type" value="{{user.salary}}" />
+    </div>
+    <br>
+    <input name="submit" type="submit" />
+</form>

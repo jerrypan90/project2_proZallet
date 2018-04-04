@@ -1,0 +1,15 @@
+<h1>Login</h1>
+<form class="userLoginForm" method="POST" action="/user/login">
+    <div class="userAttribute">
+        Email:
+        <input name="email" type="email" />
+    </div>
+    <div class="userAttribute">
+        Password:
+        <input name="password" type="password" />
+    </div>
+    {{#if invalidUser}}
+    <p class="errorMessage">Invalid User! Please try again.</p>
+    {{/if}}
+    <input name="submit" type="submit" />
+</form>
