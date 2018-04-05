@@ -20,6 +20,8 @@ const create = (db) => {
                 response.render('user/register', {duplicateEmail: true});
             } else {
                 response.cookie('loggedIn', true);
+                response.cookie('username', request.body.name);
+                response.cookie('userId', queryResult.rows[0].id);
                 response.redirect('/');
             }
         });
@@ -29,23 +31,32 @@ const create = (db) => {
 // logout function
 const logout = (request, response) => {
     response.clearCookie('loggedIn');
+    response.clearCookie('username');
+    response.clearCookie('userId');
     response.redirect('/');
 };
 
 // form to login
 const loginForm = (request, response) => {
-    response.render('user/login');
+    let context = {
+        loggedIn: request.cookies['loggedIn'],
+        username: request.cookies['username']
+    };
+    response.render('user/login', context);
 };
 
 // login function
 const login = (db) => {
     return (request, response) => {
         db.user.login(request.body, (error, queryResult) => {
+
             if (queryResult.status === false) {
                 response.render('user/login', {invalidUser: true});
             } else {
                 response.cookie('loggedIn', true);
-                response.redirect('/');
+                response.cookie('username', queryResult.name);
+                response.cookie('userId', queryResult.userId);
+                response.redirect('/user/dashboard');
             }
         });
     };
@@ -58,7 +69,6 @@ const updateInfo = (db) => {
             if (error) {
                 response.end('Invalid User');
             } else {
-                console.log(queryResult.rows[0]);
                 response.render('user/editinfo', { user: queryResult.rows[0] });
             }
         });
@@ -75,7 +85,27 @@ const update = (db) => {
                 console.error('error updating user', error);
                 response.sendStatus(500);
             } else {
-                response.redirect('user/' + userId);
+                //response.redirect('/' + 'user/' + userId + '/edit');
+                response.redirect('/user/dashboard');
+            }
+        });
+    };
+};
+
+const dashboard = (db) => {
+    return(request, response) => {
+        db.user.get(request.params.id, (error, queryResult) => {
+            // let userId = queryResult.rows[0].id;
+            if (error) {
+                response.end('Invalid User');
+            } else {
+                let context = {
+                    loggedIn: request.cookies.loggedIn,
+                    username: request.cookies.username,
+                    userId: request.cookies.userId,
+                }
+                console.log(context);
+                response.render('user/dashboard', context);
             }
         });
     };
@@ -92,5 +122,6 @@ module.exports = {
     loginForm,
     login,
     updateInfo,
-    update
+    update,
+    dashboard
 };

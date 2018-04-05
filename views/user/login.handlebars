@@ -1,15 +1,24 @@
-<h1>Login</h1>
-<form class="userLoginForm" method="POST" action="/user/login">
-    <div class="userAttribute">
-        Email:
-        <input name="email" type="email" />
-    </div>
-    <div class="userAttribute">
-        Password:
-        <input name="password" type="password" />
-    </div>
-    {{#if invalidUser}}
-    <p class="errorMessage">Invalid User! Please try again.</p>
-    {{/if}}
-    <input name="submit" type="submit" />
-</form>
+{{#if loggedIn}}
+    <form method="GET" action="/user/dashboard">
+        <input name="submit" type="submit" value="Continue from previous session">
+    </form>
+    {{else}}
+        <h1>Login</h1>
+        <form class="userLoginForm" method="POST" action="/user/dashboard">
+            <div class="userAttribute">
+                <input name="email" type="email" placeholder="Email" />
+            </div>
+            <div class="userAttribute">
+                <input name="password" type="password" placeholder="Password" />
+            </div>
+            {{#if invalidUser}}
+            <p class="errorMessage">Wrong Email or Password. Please try again.</p>
+            {{/if}}
+            <input name="submit" type="submit" />
+        </form>
+
+        <form method="GET" action="/user/register">
+            <input name="submit" type="submit" value="Sign Up">
+        </form>
+{{/if}}
+

@@ -35,15 +35,15 @@ app.set('view engine', 'handlebars');
 require('./routes')(app, db);
 
 // Root GET request (it doesn't belong in any controller file)
-app.get('/', (request, response) => {
-    let loggedIn = request.cookies['loggedIn'];
-    let username = request.cookies['username'];
-    let context = {
-        loggedIn: loggedIn,
-        username: username
-    };
-    response.render('home', context);
-});
+// app.get('/', (request, response) => {
+//     let loggedIn = request.cookies['loggedIn'];
+//     let username = request.cookies['username'];
+//     let context = {
+//         loggedIn: loggedIn,
+//         username: username
+//     };
+//     response.render('home', context);
+// });
 
 // Catch all unmatched requests and return 404 not found page
 app.get('*', (request, response) => {

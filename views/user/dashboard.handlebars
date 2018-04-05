@@ -1,0 +1,20 @@
+{{#if loggedIn}}
+    <h1>Hi {{username}}, let's start saving!</h1>
+    <form method="GET" action="/user/{{userId}}/edit">
+        <input name="submit" type="submit" value="Update Personal Information" />
+    </form>
+    <form>
+        <input name="submit" type="submit" value="Update Budget" />
+    </form>
+    <form>
+        <input name="submit" type="submit" value="Add Expenses" />
+    </form>
+    <form>
+        <input name="submit" type="submit" value="Add Friends" />
+    </form>
+    <form method="POST" action="/user/logout">
+        <button class="homeButton" type="submit">Logout</button>
+    </form>
+    {{else}}
+        <h1>Please login</h1>
+{{/if}}

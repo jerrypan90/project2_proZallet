@@ -20,8 +20,12 @@ module.exports = (dbPool) => {
                             hashed
                         ];
 
-                        dbPool.query(queryString, values, (error3, queryResult) => {
-                            callback(error3, queryResult);
+                        dbPool.query(queryString, values, (error3, result3) => {
+                            // callback(error3, queryResult);
+                            const idCheck = `SELECT * FROM users WHERE email = '${user.email}';`
+                            dbPool.query(idCheck, (error4, queryResult) => {
+                                callback(error4, queryResult);
+                            });
                         });
                     });
                 }
@@ -34,7 +38,7 @@ module.exports = (dbPool) => {
 
             dbPool.query(queryString, values, (error, queryResult) => {
                 bcrypt.compare(user.password, queryResult.rows[0].password, (error, result) => {
-                    callback(error, { status: result });
+                    callback(error, { name: queryResult.rows[0].name, userId: queryResult.rows[0].id, status: result });
                 });
             });
         },

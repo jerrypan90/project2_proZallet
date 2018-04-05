@@ -11,10 +11,15 @@ module.exports = (app, db) => {
 
     // login and logout
     app.post('/user/logout', user.logout);
-    app.get('/user/login', user.loginForm);
-    app.post('/user/login', user.login(db));
+    app.post('/user/dashboard', user.login(db));
 
+    // registered user dashboard
+    app.get('/user/dashboard', user.dashboard(db));
+    
     // edit user information
     app.get('/user/:id/edit', user.updateInfo(db));
     app.put('/user/:id', user.update(db));
+
+    // home with login form
+    app.get('/', user.loginForm);
 };
