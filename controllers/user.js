@@ -92,20 +92,42 @@ const update = (db) => {
     };
 };
 
-const dashboard = (db) => {
+const dashboard = (request, response) => {
+    let context = {
+        loggedIn: request.cookies['loggedIn'],
+        username: request.cookies['username'],
+        userId: request.cookies['userId']
+    };
+    response.render('user/dashboard', context);
+};
+
+const budgetForm = (db) => {
+        return(request, response) => {
+            db.budget.get(request.params.id, (error, queryResult) => {
+                if(error) {
+                    response.end('Unable to update')
+                } else {
+                    // let context = {
+                    // loggedIn: request.cookies['loggedIn'],
+                    // username: request.cookies['username'],
+                    // userId: request.cookies['userId'],
+                    // budget: queryResult.rows[0]
+                    // };
+                    // console.log(context.budget.category);
+                    response.render('user/budget', { budget: queryResult.rows, userId: request.cookies['userId'] });
+                };
+            });
+    };
+};
+
+const createBudget = (db) => {
     return(request, response) => {
-        db.user.get(request.params.id, (error, queryResult) => {
-            // let userId = queryResult.rows[0].id;
+        db.budget.create(request.body, (error, queryResult) => {
             if (error) {
-                response.end('Invalid User');
+                console.error('error setting budget', error);
+                response.sendStatus(500);
             } else {
-                let context = {
-                    loggedIn: request.cookies.loggedIn,
-                    username: request.cookies.username,
-                    userId: request.cookies.userId,
-                }
-                console.log(context);
-                response.render('user/dashboard', context);
+                response.redirect('/user/dashboard');
             }
         });
     };
@@ -123,5 +145,7 @@ module.exports = {
     login,
     updateInfo,
     update,
-    dashboard
+    dashboard,
+    budgetForm,
+    createBudget
 };

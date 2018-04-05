@@ -1,9 +1,10 @@
 {{#if loggedIn}}
     <h1>Hi {{username}}, let's start saving!</h1>
+
     <form method="GET" action="/user/{{userId}}/edit">
         <input name="submit" type="submit" value="Update Personal Information" />
     </form>
-    <form>
+    <form method="GET" action="/user/budget/{{userId}}">
         <input name="submit" type="submit" value="Update Budget" />
     </form>
     <form>

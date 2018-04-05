@@ -1,5 +1,6 @@
 const pg = require('pg');
 const user = require('./models/user');
+const budget = require('./models/budget');
 
 const configs = {
     user: 'jerrypan',
@@ -16,5 +17,6 @@ pool.on('error', function (err) {
 
 module.exports = {
     pool: pool,
-    user: user(pool)
+    user: user(pool),
+    budget: budget(pool)
 };

@@ -14,11 +14,15 @@ module.exports = (app, db) => {
     app.post('/user/dashboard', user.login(db));
 
     // registered user dashboard
-    app.get('/user/dashboard', user.dashboard(db));
+    app.get('/user/dashboard', user.dashboard);
     
     // edit user information
     app.get('/user/:id/edit', user.updateInfo(db));
     app.put('/user/:id', user.update(db));
+
+    // input budget
+    app.get('/user/budget/:id', user.budgetForm(db));
+    app.post('/user/budget/:id', user.createBudget(db));
 
     // home with login form
     app.get('/', user.loginForm);
