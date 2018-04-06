@@ -20,6 +20,24 @@ module.exports = (dbPool) => {
             dbPool.query(queryString, values, (error, queryResult) => {
                 callback(error, queryResult);
             });
+        },
+
+        updateBudgetForm: (id, category, callback) => {
+            const queryString = 'SELECT * from budget where users_id=$1 AND category=$2';
+            const values = [id, category];
+
+            dbPool.query(queryString, values, (error, queryResult) => {
+                callback(error, queryResult);
+            });
+        },
+
+        updateBudget: (budget, callback) => {
+            const queryString = 'UPDATE budget SET category=$1, budget=$2 where budget.id=$3';
+            const values = [budget.category, budget.budget, parseInt(budget.id)];
+
+            dbPool.query(queryString, values, (error, queryResult) => {
+                callback(error, queryResult);
+            });
         }
     };
 };

@@ -4,11 +4,17 @@
     <tr>
         <th>Category</th>
         <th>Budget</th>
+        <th> </th>
     </tr>
     {{#each budget}}
     <tr>
         <td>{{this.category}}</td>
         <td>{{this.budget}}</td>
+        <td>
+            <form method="GET" action="/user/budget/{{this.users_id}}/edit/{{this.category}}">
+                <input name="submit" type="submit" value="Edit" />
+            </form>
+        </td>
     </tr>
     {{/each}}
 </table>

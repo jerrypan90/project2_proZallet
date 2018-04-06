@@ -1,0 +1,22 @@
+<h1>Update Budget</h1>
+
+<form class="userForm" method="POST" action="/user/budget/{{userId}}?_method=PUT">
+    {{#each budget}}
+    <div class="userAttribute">
+        Serial Number:
+        <input name="id" type="type" value="{{this.id}}" readonly />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Category:
+        <input name="category" type="type" value="{{this.category}}" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Budget:
+        <input name="budget" type="type" value="{{this.budget}}" />
+    </div>
+    <br>
+    <input name="submit" type="submit" value="Save Changes" />
+    {{/each}}
+</form>

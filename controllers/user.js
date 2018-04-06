@@ -78,7 +78,7 @@ const updateInfo = (db) => {
 const update = (db) => {
     return(request, response) => {
         db.user.update(request.body, (error, queryResult) => {
-            let userId = request.params.id;
+            // let userId = request.params.id;
 
             if (error) {
                 // response.end("Sorry, your changes could not be saved.");
@@ -105,15 +105,8 @@ const budgetForm = (db) => {
         return(request, response) => {
             db.budget.get(request.params.id, (error, queryResult) => {
                 if(error) {
-                    response.end('Unable to update')
+                    response.end('Unable to display budget')
                 } else {
-                    // let context = {
-                    // loggedIn: request.cookies['loggedIn'],
-                    // username: request.cookies['username'],
-                    // userId: request.cookies['userId'],
-                    // budget: queryResult.rows[0]
-                    // };
-                    // console.log(context.budget.category);
                     response.render('user/budget', { budget: queryResult.rows, userId: request.cookies['userId'] });
                 };
             });
@@ -133,6 +126,33 @@ const createBudget = (db) => {
     };
 };
 
+const updateBudgetForm = (db) => {
+    return(request,response) => {
+        db.budget.updateBudgetForm(request.params.id, request.params.category, (error, queryResult) => {
+            if(error) {
+                response.end('error displaying budget');
+            } else {
+                response.render('user/editbudget', { budget: queryResult.rows, userId: request.cookies['userId'] });
+            }
+        });
+    };
+};
+
+const updateBudget = (db) => {
+    return(request, response) => {
+        db.budget.updateBudget(request.body, (error, queryResult) => {
+            let userId = request.params.id;
+            console.log(queryResult);
+            if(error) {
+                console.error('error updating budget', error);
+                response.sendStatus(500);
+            } else {
+                response.redirect('/' + 'user/budget/' + userId);
+            }
+        });
+    };
+};
+
 //=========================================
 // Export controller functions as a module
 //=========================================
@@ -147,5 +167,7 @@ module.exports = {
     update,
     dashboard,
     budgetForm,
-    createBudget
+    createBudget,
+    updateBudgetForm,
+    updateBudget
 };

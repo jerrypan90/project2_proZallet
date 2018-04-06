@@ -15,7 +15,7 @@ module.exports = (app, db) => {
 
     // registered user dashboard
     app.get('/user/dashboard', user.dashboard);
-    
+
     // edit user information
     app.get('/user/:id/edit', user.updateInfo(db));
     app.put('/user/:id', user.update(db));
@@ -23,6 +23,10 @@ module.exports = (app, db) => {
     // input budget
     app.get('/user/budget/:id', user.budgetForm(db));
     app.post('/user/budget/:id', user.createBudget(db));
+
+    // edit budget
+    app.get('/user/budget/:id/edit/:category', user.updateBudgetForm(db));
+    app.put('/user/budget/:id', user.updateBudget(db));
 
     // home with login form
     app.get('/', user.loginForm);
