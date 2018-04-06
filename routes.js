@@ -31,6 +31,17 @@ module.exports = (app, db) => {
     // delete budget
     app.delete('/user/budget/:id/delete/:category', user.deleteBudget(db));
 
+    // add expense
+    app.get('/user/expense/:id', user.expenseForm(db));
+    app.post('/user/expense/:id', user.createExpense(db));
+
+    // edit expense
+    app.get('/user/expense/:id/edit/:no', user.updateExpenseForm(db));
+    app.put('/user/expense/:id', user.updateExpense(db));
+
+    // delete expense
+    app.delete('/user/expense/:id/delete/:no', user.deleteExpense(db));
+
     // home with login form
     app.get('/', user.loginForm);
 };

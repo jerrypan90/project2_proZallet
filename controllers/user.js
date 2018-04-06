@@ -163,6 +163,74 @@ const deleteBudget = (db) => {
             } else {
                 response.redirect('/' + 'user/budget/' + userId);
             }
+        });
+    };
+};
+
+const expenseForm = (db) => {
+    return (request, response) => {
+        db.expense.get(request.params.id, (error, queryResult) => {
+            if (error) {
+                console.error('error displaying budget', error);
+                response.sendStatus(500);
+            } else {
+                response.render('user/expense', { expense: queryResult.rows, userId: request.cookies['userId'] });
+            }
+        });
+    };
+};
+
+const createExpense = (db) => {
+    return (request, response) => {
+        db.expense.create(request.body, (error, queryResult) => {
+            let userId = request.params.id;
+            if (error) {
+                console.error('error creating expense entry', error);
+                response.sendStatus(500);
+            } else {
+                response.redirect('/' + 'user/expense/' + userId);
+            }
+        });
+    };
+};
+
+const updateExpenseForm = (db) => {
+    return (request, response) => {
+        db.expense.updateExpenseForm(request.params.id, request.params.no, (error,queryResult) => {
+            if (error) {
+                console.error('error displaying edit budget form', error);
+                response.sendStatus(500);
+            } else {
+                response.render('user/editexpense', { expense: queryResult.rows, userId: request.cookies['userId'] });
+            }
+        });
+    };
+};
+
+const updateExpense = (db) => {
+    return (request, response) => {
+        db.expense.updateExpense(request.body, (error, queryResult) => {
+            let userId = request.params.id;
+            if (error) {
+                console.error('error updating expense', error);
+                response.sendStatus(500);
+            } else {
+                response.redirect('/' + 'user/expense/' + userId);
+            }
+        });
+    };
+};
+
+const deleteExpense = (db) => {
+    return (request, response) => {
+        db.expense.deleteExpense(request.params.id, request.params.no, (error, queryResult) => {
+            let userId = request.params.id;
+            if (error) {
+                console.error('error deleting expense', error);
+                response.sendStatus(500);
+            } else {
+                response.redirect('/' + 'user/expense/' + userId);
+            }
         })
     }
 }
@@ -184,5 +252,10 @@ module.exports = {
     createBudget,
     updateBudgetForm,
     updateBudget,
-    deleteBudget
+    deleteBudget,
+    expenseForm,
+    createExpense,
+    updateExpenseForm,
+    updateExpense,
+    deleteExpense
 };

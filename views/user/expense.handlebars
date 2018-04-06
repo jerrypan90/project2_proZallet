@@ -1,0 +1,60 @@
+<h1>Expenses Record</h1>
+
+<table border="solid">
+    <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Remark</th>
+        <th>Spent</th>
+        <th> </th>
+        <th> </th>
+    </tr>
+    {{#each expense}}
+    <tr>
+        <td>{{this.date}}</td>
+        <td>{{this.category}}</td>
+        <td>{{this.remark}}</td>
+        <td>{{this.spent}}</td>
+        <td>
+            <form method="GET" action="/user/expense/{{this.users_id}}/edit/{{this.id}}">
+                <input name="edit" type="submit" value="Edit" />
+            </form>
+        </td>
+        <td>
+            <form method="POST" action="/user/expense/{{this.users_id}}/delete/{{this.id}}?_method=DELETE">
+                <input name="delete" type="submit" value="Delete" />
+            </form>
+        </td>
+    </tr>
+    {{/each}}
+</table>
+<br>
+
+<form class="userForm" method="POST" action="/user/expense/{{userId}}">
+    <div class="userAttribute">
+        Account Number:
+        <input name="accountNumber" type="type" value="{{userId}}" readonly />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Date:
+        <input name="date" type="type" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Category:
+        <input name="category" type="type" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Remark:
+        <input name="remark" type="type" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Spent:
+        <input name="spent" type="type" />
+    </div>
+    <br>
+    <input name="submit" type="submit" value="Add" />
+</form>

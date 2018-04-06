@@ -1,0 +1,32 @@
+<h1>Update Expense</h1>
+
+<form class="userForm" method="POST" action="/user/expense/{{userId}}?_method=PUT">
+    {{#each expense}}
+    <div class="userAttribute">
+        Serial Number:
+        <input name="id" type="type" value="{{this.id}}" readonly />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Date:
+        <input name="date" type="type" value="{{this.date}}" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Category:
+        <input name="category" type="type" value="{{this.category}}" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Remark:
+        <input name="remark" type="type" value="{{this.remark}}" />
+    </div>
+    <br>
+    <div class="userAttribute">
+        Spent:
+        <input name="spent" type="type" value="{{this.spent}}" />
+    </div>
+    <br>
+    <input name="submit" type="submit" value="Save Changes" />
+    {{/each}}
+</form>
