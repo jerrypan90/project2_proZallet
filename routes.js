@@ -28,6 +28,9 @@ module.exports = (app, db) => {
     app.get('/user/budget/:id/edit/:category', user.updateBudgetForm(db));
     app.put('/user/budget/:id', user.updateBudget(db));
 
+    // delete budget
+    app.delete('/user/budget/:id/delete/:category', user.deleteBudget(db));
+
     // home with login form
     app.get('/', user.loginForm);
 };

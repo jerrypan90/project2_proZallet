@@ -116,11 +116,12 @@ const budgetForm = (db) => {
 const createBudget = (db) => {
     return(request, response) => {
         db.budget.create(request.body, (error, queryResult) => {
+            let userId = request.params.id;
             if (error) {
                 console.error('error setting budget', error);
                 response.sendStatus(500);
             } else {
-                response.redirect('/user/dashboard');
+                response.redirect('/' + 'user/budget/' + userId);
             }
         });
     };
@@ -142,7 +143,6 @@ const updateBudget = (db) => {
     return(request, response) => {
         db.budget.updateBudget(request.body, (error, queryResult) => {
             let userId = request.params.id;
-            console.log(queryResult);
             if(error) {
                 console.error('error updating budget', error);
                 response.sendStatus(500);
@@ -152,6 +152,20 @@ const updateBudget = (db) => {
         });
     };
 };
+
+const deleteBudget = (db) => {
+    return(request, response) => {
+        db.budget.deleteBudget(request.params.id, request.params.category, (error, queryResult) => {
+            let userId = request.params.id;
+            if(error) {
+                console.error('error deleting budget', error);
+                response.sendStatus(500);
+            } else {
+                response.redirect('/' + 'user/budget/' + userId);
+            }
+        })
+    }
+}
 
 //=========================================
 // Export controller functions as a module
@@ -169,5 +183,6 @@ module.exports = {
     budgetForm,
     createBudget,
     updateBudgetForm,
-    updateBudget
+    updateBudget,
+    deleteBudget
 };
