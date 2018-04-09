@@ -1,24 +1,28 @@
 {{#if loggedIn}}
-    <form method="GET" action="/user/dashboard">
-        <input name="submit" type="submit" value="Continue from previous session">
-    </form>
-    {{else}}
-        <h1>Login</h1>
+<form method="GET" action="/user/dashboard">
+    <input name="submit" type="submit" value="Continue from previous session">
+</form>
+{{else}}
+<div class="row">
+    <div class="col"></div>
+    <div class="homepage">
         <form class="userLoginForm" method="POST" action="/user/dashboard">
             <div class="userAttribute">
-                <input name="email" type="email" placeholder="Email" />
+                <input class="inputHomepage" name="email" type="email" placeholder="Email" />
             </div>
             <div class="userAttribute">
-                <input name="password" type="password" placeholder="Password" />
+                <input class="inputHomepage" name="password" type="password" placeholder="Password" />
             </div>
             {{#if invalidUser}}
             <p class="errorMessage">Wrong Email or Password. Please try again.</p>
             {{/if}}
-            <input name="submit" type="submit" />
+            <input class="loginButton" name="submit" type="submit" value="Login" />
         </form>
-
         <form method="GET" action="/user/register">
-            <input name="submit" type="submit" value="Sign Up">
+            <p id="notAMember">Not a member?</p>
+            <input class="signupButton" name="submit" type="submit" value="Sign Up">
         </form>
+    </div>
+    <div class="col"></div>
+</div>
 {{/if}}
-

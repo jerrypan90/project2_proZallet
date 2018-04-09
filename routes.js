@@ -14,7 +14,7 @@ module.exports = (app, db) => {
     app.post('/user/dashboard', user.login(db));
 
     // registered user dashboard
-    app.get('/user/dashboard', user.dashboard);
+    app.get('/user/dashboard/', user.dashboard);
 
     // edit user information
     app.get('/user/:id/edit', user.updateInfo(db));

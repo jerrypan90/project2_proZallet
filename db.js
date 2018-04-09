@@ -19,8 +19,9 @@ if (process.env.DATABASE_URL) {
         database: params.pathname.split('/')[1],
         ssl: true
     }; 
+    
 } else {
-    const configs = {
+    var configs = {
         user: 'jerrypan',
         host: '127.0.0.1',
         database: 'zallet',

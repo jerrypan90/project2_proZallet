@@ -1,16 +1,22 @@
-<h1>Registration</h1>
-<form class="userRegistrationForm" method="POST" action="/user">
-    <div class="userAttribute">
-        <input name="name" type="name" placeholder="Name" />
+<div class="row">
+    <div class="col"></div>
+    <div class="homepage">
+        <h1>Registration</h1>
+        <form class="userRegistrationForm" method="POST" action="/user">
+            <div class="userAttribute">
+                <input class="inputHomepage" name="name" type="name" placeholder="Name" />
+            </div>
+            <div class="userAttribute">
+                <input class="inputHomepage" name="email" type="email" placeholder="Email" />
+            </div>
+            {{#if duplicateEmail}}
+            <p class="errorMessage">This email is already taken.</p>
+            {{/if}}
+            <div class="userAttribute">
+                <input class="inputHomepage" name="password" type="password" placeholder="Password" />
+            </div>
+            <input class="loginButton" name="submit" type="submit" value="Sign Up" />
+        </form>
     </div>
-    <div class="userAttribute">
-        <input name="email" type="email" placeholder="Email" />
-    </div>
-    {{#if duplicateEmail}}
-    <p class="errorMessage">This email is already taken.</p>
-    {{/if}}
-    <div class="userAttribute">
-        <input name="password" type="password" placeholder="Password" />
-    </div>
-    <input name="submit" type="submit" />
-</form>
+    <div class="col"></div>
+</div>

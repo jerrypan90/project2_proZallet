@@ -1,21 +1,20 @@
 {{#if loggedIn}}
     <h1>Hi {{username}}, let's start saving!</h1>
 
-    <form method="GET" action="/user/{{userId}}/edit">
-        <input name="submit" type="submit" value="Update Personal Information" />
-    </form>
-    <form method="GET" action="/user/budget/{{userId}}">
-        <input name="submit" type="submit" value="Update Budget" />
-    </form>
-    <form method="GET" action="/user/expense/{{userId}}">
-        <input name="submit" type="submit" value="Add Expenses" />
-    </form>
-    <form>
-        <input name="submit" type="submit" value="Add Friends" />
-    </form>
-    <form method="POST" action="/user/logout">
-        <button class="homeButton" type="submit">Logout</button>
-    </form>
+    <div class="dashboard">
+        <form method="GET" action="/user/{{userId}}/edit">
+            <input class="dbButton" id="personal" name="submit" type="submit" value="Personal" />
+        </form>
+        <form method="GET" action="/user/budget/{{userId}}">
+            <input class="dbButton" id="budget" name="submit" type="submit" value="Budget" />
+        </form>
+        <form method="GET" action="/user/expense/{{userId}}">
+            <input class="dbButton" id="expenses" name="submit" type="submit" value="Expenses" />
+        </form>
+        <form>
+            <input class="dbButton" id="friends" name="submit" type="submit" value="Friends" />
+        </form>
+    </div>
     {{else}}
         <h1>Please login</h1>
 {{/if}}

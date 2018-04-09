@@ -1,5 +1,6 @@
 <h1>Update Personal Information</h1>
 
+<div>
 <form class="userForm" method="POST" action="/user/{{user.id}}?_method=PUT">
     <div class="userAttribute">
         Account Number:
@@ -37,4 +38,6 @@
     </div>
     <br>
     <input name="submit" type="submit" value="Save Changes" />
+    <button><a class="backButton" href="/user/dashboard/">Back</a></button>
 </form>
+</div>
