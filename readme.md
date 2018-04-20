@@ -18,10 +18,18 @@
 * /user/expense (user expense tracker: create, update, delete)
 
 # Wireframe
-![Home](../public/Home.png)
-![Dashboard](./public/Dashboard.png)
+
+## Home Page
+![Home](public/Home.png)
+
+## User Dashboard
+![Dashboard](public/Dashboard.png)
+
+## Budget Page
 ![Budget](public/Budget.png)
-![Friend](/public/Friend.png)
+
+## Friend List
+![Friend](public/Friend.png)
 
 # ERD
-![Friend](/public/ERD.png)
+![Friend](public/ERD.png)
